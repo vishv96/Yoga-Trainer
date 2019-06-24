@@ -46,7 +46,7 @@ class _LandingView extends State<LandingView>{
       final FirebaseAuth _auth = FirebaseAuth.fromApp(widget.app);
       GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
       GoogleSignInAuthentication gsa = await googleSignInAccount.authentication;
-      AuthCredential credential = GoogleAuthProvider.getCredential(idToken: null, accessToken: null)
+      //AuthCredential credential = GoogleAuthProvider.getCredential(idToken: null, accessToken: null)
 
       print("user name: ${user.displayName}");
       return user;
