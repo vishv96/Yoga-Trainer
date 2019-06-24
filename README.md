@@ -1,6 +1,6 @@
-# yoga_trainer
+# Yoga Trainer
 
-A new Flutter application.
+A new Flutter application. for Virtual Yoga Trainer
 
 ## Getting Started
 
