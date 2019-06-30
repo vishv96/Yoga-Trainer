@@ -1,9 +1,12 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'Login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'Auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class LandingView extends StatefulWidget{
@@ -20,7 +23,6 @@ class LandingView extends StatefulWidget{
 
 class _LandingView extends State<LandingView>{
 
-  GoogleSignInAccount _currentUser;
   FirebaseUser user;
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: <String>[
@@ -33,33 +35,19 @@ class _LandingView extends State<LandingView>{
     Navigator.push(context,MaterialPageRoute(builder: (context) => Login(app:widget.app)));
   }
 
-//  Future<FirebaseUser> googleSignin(BuildContext context) async{
-//    try{
-//      GoogleSignInAccount signInAccount = await GoogleSignInAccount.in
-//    }catch(error){
-//
-//    }
-//  }
-
   Future<void> _handleSignIn() async {
+    
     try {
-      final FirebaseAuth _auth = FirebaseAuth.fromApp(widget.app);
-      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-      GoogleSignInAuthentication gsa = await googleSignInAccount.authentication;
-      //AuthCredential credential = GoogleAuthProvider.getCredential(idToken: null, accessToken: null)
-
-      print("user name: ${user.displayName}");
-      return user;
-//      _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
-//        if (_currentUser != null) {
-//          print(account);
-////          final FirebaseAuth _auth = FirebaseAuth.fromApp(widget.app);
-////          _auth.signInWithCustomToken(account.t)
-//        }
-//      });
-//      await _googleSignIn.signIn();
-
-    } catch (error) {
+      Auth auth = Auth.App(widget.app);
+      await auth.authenticateWithGoogle();
+      auth.onGoogleLogin.listen((FirebaseUser user){
+        print(user.email);
+        Firestore(app: widget.app).collection('levels').document('1').get().then((DocumentSnapshot ds) {
+          // use ds as a snapshot
+          print(ds);
+        });
+      });
+    }catch (error){
       print(error);
     }
   }

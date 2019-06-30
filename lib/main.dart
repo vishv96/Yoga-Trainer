@@ -14,7 +14,7 @@ Future<void> main() async{
         ? const FirebaseOptions(
       googleAppID: '1:672552208046:android:add6664e60ba6ecd',
       gcmSenderID: '672552208046',
-      databaseURL: 'https://yoga-9f994.firebaseio.com',
+      databaseURL: 'https://yoga-9f994',
     )
         : const FirebaseOptions(
       googleAppID: '1:672552208046:android:6fdb7dd9b56e16e3',

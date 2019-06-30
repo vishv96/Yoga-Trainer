@@ -39,6 +39,7 @@ dev_dependencies:
   toast: ^0.1.4
   google_sign_in: ^3.2.4
   flutter_signin_button: ^0.2.8
+  cloud_firestore:
 
 
 
