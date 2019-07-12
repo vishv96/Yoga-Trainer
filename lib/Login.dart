@@ -3,7 +3,7 @@ import 'Register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:toast/toast.dart';
-
+import 'Auth.dart';
 
 
 class Login extends StatefulWidget{
@@ -25,12 +25,12 @@ class _LoginPageState extends State<Login>{
     if (formKey.currentState.validate()){
       formKey.currentState.save();
       try{
-        final FirebaseAuth _auth = FirebaseAuth.fromApp(widget.app);
-        List<String> methodes = await _auth.fetchSignInMethodsForEmail(email: _email);
-        print(methodes);
-        final FirebaseUser user = await _auth.signInWithEmailAndPassword(email: _email, password: _password);
-      }catch (error){
-        print(error);
+        Auth auth = Auth.App(widget.app);
+        await auth.authenticateWithEmailID(_email, _password);
+        auth.onLoginSucsses.listen((FirebaseUser user){
+          
+        });
+      }catch(error){
         Toast.show(error.message, context, duration: 10, gravity: Toast.TOP);
       }
     }

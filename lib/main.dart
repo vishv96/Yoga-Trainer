@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'LandingView.dart';
 import 'package:flutter/material.dart';
-import 'Login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 //void main() => runApp(MyApp());
@@ -19,7 +18,7 @@ Future<void> main() async{
         : const FirebaseOptions(
       googleAppID: '1:672552208046:android:6fdb7dd9b56e16e3',
       apiKey: 'AIzaSyBVjk0MfTaEJwV1GLrkG_ZBNBU5jNJBP3c',
-      databaseURL: 'https://yoga-9f994.firebaseio.com',
+      databaseURL: 'https://yoga-9f994',
     ),
   );
 
